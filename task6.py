@@ -5,7 +5,7 @@
 def turn_the_tables(array):
     for i in range(len(array)):
         k = array[i] * 2
-        array[i] = array[i] - k
+        array[i] -= k
     return array
 
 test = [1, -5, 0, 3, -4]
