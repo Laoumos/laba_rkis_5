@@ -8,29 +8,45 @@
 # два числа (сумму положительных элементов и произведение чисел, расположенных между
 # минимальным и максимальным элементами);
 
+import random
+
 def petya(array):
-	# решение на сумму элементов
-	result_sum = 0
-	only_positives = [i for i in array if i > 0]
-	for i in range(len(only_positives)):
-		result_sum += only_positives[i]
+    # решение на сумму элементов
+    result_sum = 0
+    only_positives = [i for i in array if i > 0]
+    for i in range(len(only_positives)):
+        result_sum += only_positives[i]
 
-	# решение на произведение чисел
-	array_maxnum = array[0]
-	array_minnum = array[0]
-	result_multiply = 1
+    # решение на произведение чисел
+    array_maxnum = array[0]
+    array_minnum = array[0]
+    max_index = 0
+    min_index = 0
+    result_multiply = 1
 
-	for i in range(len(array)):
-		if array[i] > array_maxnum:
-			array_maxnum = array[i]
-		if array[i] < array_minnum:
-			array_minnum = array[i]
+    for i in range(len(array)):
+        if array[i] > array_maxnum:
+            array_maxnum = array[i]
+            max_index = i
+        if array[i] < array_minnum:
+            array_minnum = array[i]
+            min_index = i
 
-	for i in range(array.index(array_maxnum) + 1, array.index(array_minnum)):
-		result_multiply *= array[i]
+    if max_index - min_index == 1 or min_index - max_index == 1:
+        result_multiply = None
+    else:
+        if max_index < min_index:
+            for i in range(max_index + 1, min_index):
+                    result_multiply *= array[i]
+        if max_index > min_index:
+            for i in range(min_index + 1, max_index):
+                    result_multiply *= array[i]
 
-	return result_sum, result_multiply
+    return result_sum, result_multiply, max_index, min_index
 
 
-test = [1, 2, 3, 4, 5, -1, -2, 4, -3]
+test = [1, -4, 3, 4, 5, -4, 1, -2, -3]
+test2 = [random.randint(-100, 100) for i in range(10)]
 print(petya(test), test)
+print(petya(test2), test2)
+
