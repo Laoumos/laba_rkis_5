@@ -2,6 +2,6 @@
 # включительно;
 user_input = int(input('\t 1 + ... + N\nВведите число N: '))
 if user_input:
-    for i in range(1, user_input):4
+    for i in range(1, user_input):
         user_input += i
 print(f'Результат есть {user_input}')
